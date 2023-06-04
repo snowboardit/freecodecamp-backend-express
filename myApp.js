@@ -1,6 +1,7 @@
 // Imports
 require('dotenv').config()
 const express = require('express'),
+    bodyParser = require('body-parser'),
     app = express();
 
 // Local imports
@@ -10,6 +11,7 @@ const logger = require('./middleware/logger'),
 
 // Middlewares
 app.use(logger);
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/public', express.static('public'));
 
 // Routes
