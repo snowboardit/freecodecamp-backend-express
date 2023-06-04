@@ -1,13 +1,14 @@
 // Imports
 require('dotenv').config()
-const express = require('express');
-const app = express();
+const express = require('express'),
+    app = express();
 
 // Local imports
-const logger = require("./middleware/logger")
+const logger = require('./middleware/logger'),
+    now = require('./middleware/now');
 
 // Middlewares
-app.use(logger)
+app.use(logger);
 app.use('/public', express.static('public'));
 
 // Routes
@@ -24,6 +25,9 @@ app.get('/json', (req, res) => {
     res.json(json);
 });
 
+app.get('/now', now, (req, res) => {
+    res.json({ time: req.time })
+});
 
 
 
