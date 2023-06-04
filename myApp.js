@@ -5,7 +5,8 @@ const express = require('express'),
 
 // Local imports
 const logger = require('./middleware/logger'),
-    now = require('./middleware/now');
+    now = require('./middleware/now'),
+    name = require('./routes/name');
 
 // Middlewares
 app.use(logger);
@@ -36,5 +37,7 @@ app.get('/:word/echo', (req, res) => {
     res.status(200)
         .json({ echo })
 })
+
+app.route('/name').get(name).post(name)
 
 module.exports = app;
