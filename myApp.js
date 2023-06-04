@@ -8,6 +8,11 @@ app.get('/', (req, res) => {
     res.sendFile(file);
 });
 
+app.get('/json', (req, res) => {
+    const json = { "message": "Hello json" }
+    res.json(json);
+});
+
 
 
 
