@@ -14,49 +14,27 @@ app.use('/public', express.static('public'));
 // Routes
 app.get('/', (req, res) => {
     const file = __dirname + '/views/index.html'
-    res.sendFile(file);
+    res.status(200)
+        .sendFile(file);
 });
 
 app.get('/json', (req, res) => {
     const isUppercase = process.env.MESSAGE_STYLE === 'uppercase' ? true : false,
         m = 'Hello json',
-        message = isUppercase ? m.toUpperCase() : m,
-        json = { message }
-    res.json(json);
+        message = isUppercase ? m.toUpperCase() : m;
+    res.status(200)
+        .json({ message });
 });
 
 app.get('/now', now, (req, res) => {
-    res.json({ time: req.time })
+    res.status(200)
+        .json({ time: req.time })
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.get('/:word/echo', (req, res) => {
+    const echo = req.params.word.trim()
+    res.status(200)
+        .json({ echo })
+})
 
 module.exports = app;
