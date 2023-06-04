@@ -1,9 +1,16 @@
+// Imports
 require('dotenv').config()
-let express = require('express');
-let app = express();
+const express = require('express');
+const app = express();
 
+// Local imports
+const logger = require("./middleware/logger")
+
+// Middlewares
+app.use(logger)
 app.use('/public', express.static('public'));
 
+// Routes
 app.get('/', (req, res) => {
     const file = __dirname + '/views/index.html'
     res.sendFile(file);
