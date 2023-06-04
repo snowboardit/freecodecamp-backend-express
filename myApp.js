@@ -10,8 +10,8 @@ const logger = require('./middleware/logger'),
     name = require('./routes/name');
 
 // Middlewares
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger);
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/public', express.static('public'));
 
 // Routes
@@ -34,12 +34,14 @@ app.get('/now', now, (req, res) => {
         .json({ time: req.time })
 });
 
+app.route('/name')
+    .get(name.get)
+    .post(name.post)
+
 app.get('/:word/echo', (req, res) => {
     const echo = req.params.word.trim()
     res.status(200)
         .json({ echo })
 })
-
-app.route('/name').get(name).post(name)
 
 module.exports = app;
